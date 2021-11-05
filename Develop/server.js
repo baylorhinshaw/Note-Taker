@@ -24,15 +24,19 @@ app.get('/notes', (req, res) => {
 
 app.get('/api/notes', (req, res) => res.json(db));
 
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/public/404.html')));
 
+
+//  Post request to add new note
 // {flag: 'w'} will need to require this to be able to overwrite db.json file
+// Destructuring assignment from req.body 
 app.post('/api/notes', (req, res) => {
     const { title, text} = req.body;
     
     const newNote = {
         title, 
         text,
-        note_id: uuid(),
+        id: uuid(),
     };
     
     db.push(newNote);
@@ -40,7 +44,6 @@ app.post('/api/notes', (req, res) => {
     res.send(newNote);
 });
 
-// app.delete('/:id', (req, res) => res.json(`DELETE route`));
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
