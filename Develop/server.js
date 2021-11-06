@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 // Helper method for generating unique ids
 // Db is where my objects are
 const uuid = require('./helpers/uuid')
